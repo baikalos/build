@@ -839,17 +839,16 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   system_progress = 0.75
 
   script.Print("**************************************************");
-  script.Print(" ____    ________   _____   ____    ____          ");
-  script.Print("/\\  _`\\ /\\_____  \\ /\\  __`\\/\\  _`\\ /\\  _`\\         ");
-  script.Print("\\ \\ \\L\\_\\/____//'/'\\ \\ \\/\\ \\ \\,\\L\\_\\ \\ \\L\\\\");
-  script.Print(" \\ \\ \\L_L    //'/'  \\ \\ \\ \\ \\/_\\__ \\ \\ ,__/       ");
-  script.Print("  \\ \\ \\/, \\ //'/'___ \\ \\ \\_\\ \\/\\ \\L\\ \\ \\ \\/   ");
-  script.Print("   \\ \\____/ /\\_______\\\\ \\_____\\ `\\____\\ \\_\\       ");
-  script.Print("    \\/___/  \\/_______/ \\/_____/\\/_____/\\/_/   ");
-  script.Print("                                                   ");
-  script.Print("                   AOSP Pie                        ");
-  script.Print("          A Ground Zero Roms Project               ");
-  script.Print("***************************************************");
+  script.Print("     ____        _ __         __   ____  _____    ");
+  script.Print("    / __ )____ _(_) /______ _/ /  / __ \/ ___/    ");
+  script.Print("   / __  / __ `/ / //_/ __ `/ /  / / / /\__ \     ");
+  script.Print("  / /_/ / /_/ / / ,< / /_/ / /  / /_/ /___/ /     ");
+  script.Print(" /_____/\__,_/_/_/|_|\__,_/_/   \____//____/      ");
+  script.Print("                                                  ");
+  script.Print("  BaikalOS - Pie with shit with love from Russia  ");
+  script.Print("             Enjoy it, Dear Friends.              ");
+  script.Print("                 Your Team: andr68rus, s.vasiliev ");
+  script.Print("**************************************************");
 
   if OPTIONS.wipe_user_data:
     system_progress -= 0.1
