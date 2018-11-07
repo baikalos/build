@@ -62,5 +62,6 @@ fi
 echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
 
 echo "ro.baikalos.device=$BAIKALOS_DEVICE"
+echo "ro.baikalos.ota.version=P-${TARGET_DEVICE#*_}-$(cat $OUT_DIR/target/product/${TARGET_DEVICE#*_}/build_date_time.txt)"
 
 echo "# end build properties"
