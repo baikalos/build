@@ -3212,19 +3212,20 @@ otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
 baikalos: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(BAIKALOS_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(BAIKALOS_TARGET_PACKAGE) > $(BAIKALOS_TARGET_PACKAGE).md5sum
-	echo -e ${CL_RED}""${CL_RED}
-	echo -e ${CL_RED}"@@@@@@@    @@@@@@   @@@  @@@  @@@   @@@@@@   @@@        @@@@@@    @@@@@@ "${CL_RED}
-	echo -e ${CL_RED}"@@@@@@@@  @@@@@@@@  @@@  @@@  @@@  @@@@@@@@  @@@       @@@@@@@@  @@@@@@@ "${CL_RED}
-	echo -e ${CL_RED}"@@!  @@@  @@!  @@@  @@!  @@!  !@@  @@!  @@@  @@!       @@!  @@@  !@@     "${CL_RED}
-	echo -e ${CL_RED}"!@   @!@  !@!  @!@  !@!  !@!  @!!  !@!  @!@  !@!       !@!  @!@  !@!     "${CL_RED}
-	echo -e ${CL_RED}"@!@!@!@   @!@!@!@!  !!@  @!@@!@!   @!@!@!@!  @!!       @!@  !@!  !!@@!!  "${CL_RED}
-	echo -e ${CL_RED}"!!!@!!!!  !!!@!!!!  !!!  !!@!!!    !!!@!!!!  !!!       !@!  !!!   !!@!!! "${CL_RED}
-	echo -e ${CL_RED}"!!:  !!!  !!:  !!!  !!:  !!: :!!   !!:  !!!  !!:       !!:  !!!       !:!"${CL_RED}
-	echo -e ${CL_RED}":!:  !:!  :!:  !:!  :!:  :!:  !:!  :!:  !:!   :!:      :!:  !:!      !:! "${CL_RED}
-	echo -e ${CL_RED}" :: ::::  ::   :::   ::   ::  :::  ::   :::   :: ::::  ::::: ::  :::: :: "${CL_RED}
-	echo -e ${CL_RED}":: : ::    :   : :  :     :   :::   :   : :  : :: : :   : :  :   :: : :  "${CL_RED}
-	echo -e ${CL_RED}"                           BaikalOS Rom "${CL_RED}
-	echo -e ${CL_RED}"                                Project      "${CL_RED}
+	echo -e ${CL_BLUE}""${CL_BLUE}
+	echo -e ${CL_BLUE}"==========================================================="${CL_BLUE}
+	echo -e ${CL_BLUE}"=      ===============  ============  ====    =====      =="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ==============  ============  ===  ==  ===  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ====  =============  ============  ==  ====  ==  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ====   ===  ==  =  ===   ===  ==  ====  ===  ======"${CL_BLUE}
+	echo -e ${CL_BLUE}"=      ====  =  ======    ===  =  ==  ==  ====  =====  ===="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ======  ==  ==   =======  ==  ==  ====  =======  =="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ====  ===    ==  ==    ====    ==  ==  ====  ==  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ===  =  ==  ==  =  ==  =  ==  ===  ==  ===  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=      =====    ==  ==  =  ===    ==  ====    =====      =="${CL_BLUE}
+	echo -e ${CL_BLUE}"==========================================================="${CL_BLUE}
+	echo -e ${CL_GREEN}"                           BaikalOS ROM "${CL_GREEN}
+	echo -e ${CL_GREEN}"                                Project "${CL_GREEN}
 
 endif    # build_ota_package
 
