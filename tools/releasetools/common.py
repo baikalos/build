@@ -1747,24 +1747,24 @@ class BlockDifference(object):
     #   compression_time:   75s  | 265s               | 719s
     #   decompression_time: 15s  | 25s                | 25s
 
-    if not self.src:
-      brotli_cmd = ['brotli', '--quality=6',
-                    '--output={}.new.dat.br'.format(self.path),
-                    '{}.new.dat'.format(self.path)]
-      print("Compressing {}.new.dat with brotli".format(self.partition))
-      p = Run(brotli_cmd, stdout=subprocess.PIPE)
-      p.communicate()
-      assert p.returncode == 0,\
-          'compression of {}.new.dat failed'.format(self.partition)
-
-      new_data_name = '{}.new.dat.br'.format(self.partition)
-      ZipWrite(output_zip,
-               '{}.new.dat.br'.format(self.path),
-               new_data_name,
-               compress_type=zipfile.ZIP_STORED)
-    else:
-      new_data_name = '{}.new.dat'.format(self.partition)
-      ZipWrite(output_zip, '{}.new.dat'.format(self.path), new_data_name)
+    #if not self.src:
+    #  brotli_cmd = ['brotli', '--quality=6',
+    #                '--output={}.new.dat.br'.format(self.path),
+    #                '{}.new.dat'.format(self.path)]
+    #  print("Compressing {}.new.dat with brotli".format(self.partition))
+    #  p = Run(brotli_cmd, stdout=subprocess.PIPE)
+    #  p.communicate()
+    #  assert p.returncode == 0,\
+    #      'compression of {}.new.dat failed'.format(self.partition)
+    #
+    #  new_data_name = '{}.new.dat.br'.format(self.partition)
+    #  ZipWrite(output_zip,
+    #           '{}.new.dat.br'.format(self.path),
+    #           new_data_name,
+    #           compress_type=zipfile.ZIP_STORED)
+    #else:
+    new_data_name = '{}.new.dat'.format(self.partition)
+    ZipWrite(output_zip, '{}.new.dat'.format(self.path), new_data_name)
 
     ZipWrite(output_zip,
              '{}.patch.dat'.format(self.path),
