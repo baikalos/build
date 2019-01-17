@@ -3172,7 +3172,12 @@ ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
 
-build_date_time := $(shell date +"%Y%m%d-%H%M")
+ifeq ($(BAIKALOS_BUILD_TYPE),DEV)
+    build_date_time := $(shell date +"%Y%m%d")
+else
+    build_date_time := $(shell date +"%Y%m%d-%H%M")
+endif
+
 huy := $(shell echo $(build_date_time) > $(PRODUCT_OUT)/build_date_time.txt)
 name := Baikal-OS-P-$(TARGET_DEVICE)-$(BAIKALOS_BUILD_TYPE)-$(build_date_time)
 
