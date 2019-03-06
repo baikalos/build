@@ -845,7 +845,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
   script.Print("  / /_/ / /_/ / / ,< / /_/ / /  / /_/ /___/ /     ");
   script.Print(" /_____/\__,_/_/_/|_|\__,_/_/   \____//____/      ");
   script.Print("                                                  ");
-  script.Print("  BaikalOS - Pie with shit with love from Russia  ");
+  script.Print("  BaikalOS - Pie with love from Russia            ");
   script.Print("             Enjoy it, Dear Friends.              ");
   script.Print("                 Your Team: andr68rus, s.vasiliev ");
   script.Print("**************************************************");
