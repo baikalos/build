@@ -40,7 +40,7 @@ PRODUCT_PACKAGES += \
     WallpaperCropper \
     frameworks-base-overlays
 
-ifeq ($(AICP_BUILD),)
+ifeq ($(BAIKALOS_BUILD),)
 PRODUCT_PACKAGES += \
     LatinIME
 endif

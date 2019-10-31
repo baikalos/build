@@ -2381,7 +2381,7 @@ fi
 
   logger.info("putting script in %s", sh_location)
 
-  output_sink(sh_location, sh.encode())
+  # output_sink(sh_location, sh.encode())
 
 
 class DynamicPartitionUpdate(object):
