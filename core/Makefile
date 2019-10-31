@@ -415,7 +415,7 @@ endif
 	$(hide) TARGET_BUILD_TYPE="$(TARGET_BUILD_VARIANT)" \
 	        TARGET_BUILD_FLAVOR="$(TARGET_BUILD_FLAVOR)" \
 	        TARGET_DEVICE="$(TARGET_DEVICE)" \
-	        AICP_DEVICE="$(TARGET_DEVICE)" \
+	        BAIKALOS_DEVICE="$(TARGET_DEVICE)" \
 	        PRODUCT_DEFAULT_LOCALE="$(call get-default-product-locale,$(PRODUCT_LOCALES))" \
 	        PRODUCT_DEFAULT_WIFI_CHANNELS="$(PRODUCT_DEFAULT_WIFI_CHANNELS)" \
 	        PRIVATE_BUILD_DESC="$(PRIVATE_BUILD_DESC)" \
@@ -2171,7 +2171,7 @@ INTERNAL_SYSTEMIMAGE_FILES := $(sort $(filter $(TARGET_OUT)/%, \
 .PHONY: systemimage-changelog
 systemimage-changelog: $(INTERNAL_SYSTEMIMAGE_FILES)
 	@echo -e "Making changelog!"
-	$(hide) APKCERTS=$(APKCERTS_FILE) ./vendor/aicp/tools/changelog
+	$(hide) APKCERTS=$(APKCERTS_FILE) ./vendor/baikalos/tools/changelog
 
 CHANGELOG := systemimage-changelog
 

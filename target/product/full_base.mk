@@ -50,7 +50,7 @@ PRODUCT_PROPERTY_OVERRIDES := \
 PRODUCT_LOCALES := en_US
 
 # Get some sounds
-ifeq ($(AICP_BUILD),)
+ifeq ($(BAIKALOS_BUILD),)
 $(call inherit-product-if-exists, frameworks/base/data/sounds/AllAudio.mk)
 else
 $(call inherit-product-if-exists, frameworks/base/data/sounds/AudioPackage14.mk)
