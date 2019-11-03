@@ -38,12 +38,8 @@ PRODUCT_PACKAGES += \
     StorageManager \
     SystemUI \
     WallpaperCropper \
-    frameworks-base-overlays
-
-ifeq ($(BAIKALOS_BUILD),)
-PRODUCT_PACKAGES += \
+    frameworks-base-overlays \
     LatinIME
-endif
 
 PRODUCT_PACKAGES_DEBUG += \
     frameworks-base-overlays-debug
