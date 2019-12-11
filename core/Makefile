@@ -443,6 +443,7 @@ endif
 	        TARGET_CPU_ABI_LIST_64_BIT="$(TARGET_CPU_ABI_LIST_64_BIT)" \
 	        TARGET_CPU_ABI="$(TARGET_CPU_ABI)" \
 	        TARGET_CPU_ABI2="$(TARGET_CPU_ABI2)" \
+		BAIKALOS_BUILDTYPE="$(BAIKALOS_BUILD_TYPE)" \
 	        $(PRODUCT_BUILD_PROP_OVERRIDES) \
 	        bash $(BUILDINFO_SH) >> $@
 	$(hide) $(foreach file,$(system_prop_file), \
@@ -4263,7 +4264,15 @@ name := $(TARGET_PRODUCT)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-ota-$(FILE_NAME_TAG)
+
+ifeq ($(BAIKALOS_BUILDTYPE),DEV)
+    build_date_time := $(shell date +"%Y%m%d")
+else
+    build_date_time := $(shell date +"%Y%m%d-%H%M")
+endif
+
+huy := $(shell echo $(build_date_time) > $(PRODUCT_OUT)/build_date_time.txt)
+name := Baikal-OS-Q-$(TARGET_DEVICE)-$(BAIKALOS_BUILDTYPE)-$(build_date_time)
 
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
@@ -4328,6 +4337,24 @@ $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): $(BUILT_TARGET_FILES
 .PHONY: otardppackage
 
 otapackage otardppackage: $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)
+
+baikalos: otapackage
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(BAIKALOS_TARGET_PACKAGE)
+	$(hide) $(MD5SUM) $(BAIKALOS_TARGET_PACKAGE) > $(BAIKALOS_TARGET_PACKAGE).md5sum
+	echo -e ${CL_BLUE}""${CL_BLUE}
+	echo -e ${CL_BLUE}"==========================================================="${CL_BLUE}
+	echo -e ${CL_BLUE}"=      ===============  ============  ====    =====      =="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ==============  ============  ===  ==  ===  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ====  =============  ============  ==  ====  ==  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ====   ===  ==  =  ===   ===  ==  ====  ===  ======"${CL_BLUE}
+	echo -e ${CL_BLUE}"=      ====  =  ======    ===  =  ==  ==  ====  =====  ===="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ======  ==  ==   =======  ==  ==  ====  =======  =="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ====  ===    ==  ==    ====    ==  ==  ====  ==  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ===  =  ==  ==  =  ==  =  ==  ===  ==  ===  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=      =====    ==  ==  =  ===    ==  ====    =====      =="${CL_BLUE}
+	echo -e ${CL_BLUE}"==========================================================="${CL_BLUE}
+	echo -e ${CL_GREEN}"                           BaikalOS ROM "${CL_GREEN}
+	echo -e ${CL_GREEN}"                                Project "${CL_GREEN}
 
 endif # BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE
 

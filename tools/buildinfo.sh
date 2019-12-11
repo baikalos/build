@@ -28,6 +28,10 @@ fi
 if [ -n "$AB_OTA_UPDATER" ] ; then
   echo "ro.build.ab_update=$AB_OTA_UPDATER"
 fi
+echo "ro.product.model=$PRODUCT_MODEL"
+echo "ro.product.brand=$PRODUCT_BRAND"
+echo "ro.product.name=$PRODUCT_NAME"
+echo "ro.product.device=$TARGET_DEVICE"
 
 # These values are deprecated, use "ro.product.cpu.abilist"
 # instead (see below).
@@ -41,6 +45,7 @@ echo "ro.product.cpu.abilist=$TARGET_CPU_ABI_LIST"
 echo "ro.product.cpu.abilist32=$TARGET_CPU_ABI_LIST_32_BIT"
 echo "ro.product.cpu.abilist64=$TARGET_CPU_ABI_LIST_64_BIT"
 
+echo "ro.product.manufacturer=$PRODUCT_MANUFACTURER"
 if [ -n "$PRODUCT_DEFAULT_LOCALE" ] ; then
   echo "ro.product.locale=$PRODUCT_DEFAULT_LOCALE"
 fi
@@ -51,14 +56,29 @@ echo "ro.build.product=$TARGET_DEVICE"
 
 echo "# Do not try to parse description or thumbprint"
 echo "ro.build.description=$PRIVATE_BUILD_DESC"
+echo "ro.build.fingerprint=$BUILD_FINGERPRINT"
 if [ -n "$BUILD_THUMBPRINT" ] ; then
   echo "ro.build.thumbprint=$BUILD_THUMBPRINT"
 fi
-
 if [ -n "$DEVICE_MAINTAINERS" ] ; then
   echo "ro.baikalos.maintainer=$DEVICE_MAINTAINERS"
 fi
+echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
+
+if [ -z "$BAIKALOS_BUILDTYPE" ] ; then
+  BAIKALOS_BUILDTYPE="UNOFFICIAL"
+fi
 
 echo "ro.baikalos.device=$BAIKALOS_DEVICE"
+echo "ro.baikalos.ota.version=Q-${TARGET_DEVICE#*_}-${BAIKALOS_BUILDTYPE}-$(cat $OUT_DIR/target/product/${TARGET_DEVICE#*_}/build_date_time.txt)"
+
+# ROMStats
+echo "ro.romstats.buildtype=$BAIKALOS_BUILDTYPE"
+echo "ro.romstats.url=https://stats.baikalos.ru/"
+echo "ro.romstats.name=BaikalOS"
+echo "ro.romstats.version=10.0"
+echo "ro.romstats.tframe=1"
+echo "ro.romstats.askfirst=0"
+
 
 echo "# end build properties"
