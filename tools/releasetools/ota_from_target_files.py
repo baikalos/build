@@ -983,22 +983,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   system_progress = 0.75
 
-  script.Print("*********************************************");
-  script.Print("*       ##### ####****   ########****       *")
-  script.Print("*     ############**** ##########******     *")
-  script.Print("*    ####     ####****#####  ****  *****    *")
-  script.Print("*    ###       ###****####   ****   ****    *")
-  script.Print("*    ####     ####****#####  ****  *****    *")
-  script.Print("*     ############**** ##########******     *")
-  script.Print("*       ##### ####****   ########****       *")
-  script.Print("*                            ****           *")
-  script.Print("*                            ****           *")
-  script.Print("* www.aicp-rom.com   -   Get your flash ON  *")
-  script.Print("*********************************************");
-
 
   build = target_info.GetBuildProp("ro.build.date")
-  script.Print("*************    AICP   BUILD   *************");
+  script.Print("*************    BAIKALOS   BUILD   *************");
   script.Print("*********************************************");
   script.Print("   Compiled: %s"%(build));
 

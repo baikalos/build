@@ -213,6 +213,7 @@ endef
 
 # Like the above macro, but requiring the relevant PRODUCT_ environment
 # variables to be set when called.
+
 define generate-common-build-props-with-product-vars-set
 	BUILD_FINGERPRINT="$(BUILD_FINGERPRINT_FROM_FILE)" \
 	BUILD_ID="$(BUILD_ID)" \
@@ -331,7 +332,7 @@ ifneq (,$(shell mkdir -p $(PRODUCT_OUT) && echo $(BUILD_FINGERPRINT) >$(BUILD_FI
 endif
 BUILD_FINGERPRINT_FROM_FILE := $$(cat $(BUILD_FINGERPRINT_FILE))
 # unset it for safety.
-BUILD_FINGERPRINT :=
+#BUILD_FINGERPRINT :=
 
 # The string used to uniquely identify the system build; used by the OTA server.
 # This purposefully excludes any product-specific variables.
@@ -345,7 +346,7 @@ ifneq (,$(shell mkdir -p $(PRODUCT_OUT) && echo $(BUILD_THUMBPRINT) >$(BUILD_THU
 endif
 BUILD_THUMBPRINT_FROM_FILE := $$(cat $(BUILD_THUMBPRINT_FILE))
 # unset it for safety.
-BUILD_THUMBPRINT :=
+#BUILD_THUMBPRINT :=
 
 KNOWN_OEM_THUMBPRINT_PROPERTIES := \
     ro.product.brand \
@@ -444,6 +445,7 @@ endif
 	        TARGET_CPU_ABI="$(TARGET_CPU_ABI)" \
 	        TARGET_CPU_ABI2="$(TARGET_CPU_ABI2)" \
 		BAIKALOS_BUILDTYPE="$(BAIKALOS_BUILD_TYPE)" \
+		BUILD_FINGERPRINT="$(BUILD_FINGERPRINT)" \
 	        $(PRODUCT_BUILD_PROP_OVERRIDES) \
 	        bash $(BUILDINFO_SH) >> $@
 	$(hide) $(foreach file,$(system_prop_file), \
@@ -4295,7 +4297,7 @@ endif
 ifeq ($(WITH_GMS),true)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
 else
-ifneq ($(AICP_BUILD),)
+ifneq ($(BAIKALOS_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
