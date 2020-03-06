@@ -68,7 +68,6 @@ PRODUCT_PACKAGES += \
     Telecom \
     TelephonyProvider \
     TeleService \
-    Traceur \
     UserDictionaryProvider \
     VpnDialogs \
     vr \
