@@ -4372,6 +4372,8 @@ $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): $(BUILT_TARGET_FILES
 	@echo "Package OTA (retrofit dynamic partitions): $@"
 	$(call build-ota-package-target,$@,-k $(KEY_CERT_PAIR) --retrofit_dynamic_partitions)
 
+BAIKALOS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(BAIKALOS_VERSION).zip
+
 .PHONY: otardppackage
 
 otapackage otardppackage: $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)
