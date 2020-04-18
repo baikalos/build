@@ -4291,7 +4291,7 @@ else
 endif
 
 huy := $(shell echo $(build_date_time) > $(PRODUCT_OUT)/build_date_time.txt)
-name := Baikal-OS-Q-$(TARGET_DEVICE)-$(BAIKALOS_BUILDTYPE)-$(build_date_time)
+name := BaikalOS-$(TARGET_DEVICE)-10-$(BAIKALOS_BUILDTYPE)-$(build_date_time)
 
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
@@ -4356,9 +4356,9 @@ $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): $(BUILT_TARGET_FILES
 BAIKALOS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(BAIKALOS_VERSION).zip
 
 .PHONY: otardppackage
+otardppackage: $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)
 
-otapackage otardppackage: $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET)
-
+.PHONY: baikalos
 baikalos: otapackage
 	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(BAIKALOS_TARGET_PACKAGE)
 	$(hide) $(MD5SUM) $(BAIKALOS_TARGET_PACKAGE) > $(BAIKALOS_TARGET_PACKAGE).md5sum
