@@ -4291,7 +4291,7 @@ else
 endif
 
 huy := $(shell echo $(build_date_time) > $(PRODUCT_OUT)/build_date_time.txt)
-name := Baikal-OS-Q-$(TARGET_DEVICE)-$(BAIKALOS_BUILDTYPE)-$(build_date_time)
+name := BaikalOS-10-$(TARGET_DEVICE)-$(BAIKALOS_BUILDTYPE)-$(build_date_time)
 
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
