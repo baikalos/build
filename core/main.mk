@@ -66,7 +66,7 @@ include $(BUILD_SYSTEM)/clang/config.mk
 
 BUILD_NUMBER_FILE := $(OUT_DIR)/build_number.txt
 
-ifneq ($(BAIKALOS_BUILDTYPE),DEV)
+ifneq ($(BAIKALOS_BUILD_TYPE),DEV)
 $(shell mkdir -p $(OUT_DIR) && \
     echo -n $(BUILD_NUMBER) > $(OUT_DIR)/build_number.txt)
 BUILD_NUMBER_FILE := $(OUT_DIR)/build_number.txt

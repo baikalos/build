@@ -445,7 +445,7 @@ endif
 	        TARGET_CPU_ABI_LIST_64_BIT="$(TARGET_CPU_ABI_LIST_64_BIT)" \
 	        TARGET_CPU_ABI="$(TARGET_CPU_ABI)" \
 	        TARGET_CPU_ABI2="$(TARGET_CPU_ABI2)" \
-            BAIKALOS_BUILDTYPE="$(BAIKALOS_BUILD_TYPE)" \
+            BAIKALOS_BUILD_TYPE="$(BAIKALOS_BUILD_TYPE)" \
             BUILD_FINGERPRINT="$(BUILD_FINGERPRINT)" \
             PRODUCT_DEVICE="$(PRODUCT_SYSTEM_DEVICE)" \
 	        PRODUCT_NAME="$(PRODUCT_SYSTEM_NAME)" \
@@ -4284,14 +4284,14 @@ ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
 
-ifeq ($(BAIKALOS_BUILDTYPE),DEV)
+ifeq ($(BAIKALOS_BUILD_TYPE),DEV)
     build_date_time := $(shell date +"%Y%m%d")
 else
     build_date_time := $(shell date +"%Y%m%d-%H%M")
 endif
 
 huy := $(shell echo $(build_date_time) > $(PRODUCT_OUT)/build_date_time.txt)
-name := BaikalOS-10-$(TARGET_DEVICE)-$(BAIKALOS_BUILDTYPE)-$(build_date_time)
+name := BaikalOS-10-$(TARGET_DEVICE)-$(BAIKALOS_BUILD_TYPE)-$(build_date_time)
 
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 
