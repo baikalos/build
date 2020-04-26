@@ -71,7 +71,7 @@ if [ -z "$BAIKALOS_BUILD_TYPE" ] ; then
 fi
 
 echo "ro.baikalos.device=$BAIKALOS_DEVICE"
-echo "ro.baikalos.ota.version=Q-${TARGET_DEVICE#*_}-${BAIKALOS_BUILD_TYPE}-$(cat $OUT_DIR/target/product/${TARGET_DEVICE#*_}/build_date_time.txt)"
+echo "ro.baikalos.ota.version=10-${TARGET_DEVICE#*_}-${BAIKALOS_BUILD_TYPE}-$(cat $OUT_DIR/target/product/${TARGET_DEVICE#*_}/build_date_time.txt)"
 
 # ROMStats
 echo "ro.romstats.buildtype=$BAIKALOS_BUILD_TYPE"
