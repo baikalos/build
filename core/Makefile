@@ -2235,7 +2235,9 @@ systemimage-changelog: $(INTERNAL_SYSTEMIMAGE_FILES)
 	@echo -e "Making changelog!"
 	$(hide) APKCERTS=$(APKCERTS_FILE) ./vendor/baikalos/tools/changelog
 
-CHANGELOG := systemimage-changelog
+ifneq ($(BAIKALOS_BUILD_TYPE),DEV)
+    CHANGELOG := systemimage-changelog
+endif
 
 FULL_SYSTEMIMAGE_DEPS := $(INTERNAL_SYSTEMIMAGE_FILES) $(INTERNAL_USERIMAGES_DEPS)
 
