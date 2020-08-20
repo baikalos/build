@@ -2231,9 +2231,9 @@ INTERNAL_SYSTEMIMAGE_FILES := $(sort $(filter $(TARGET_OUT)/%, \
     $(PDK_FUSION_SYMLINK_STAMP))
 
 .PHONY: systemimage-changelog
-systemimage-changelog: $(INTERNAL_SYSTEMIMAGE_FILES)
-	@echo -e "Making changelog!"
-	$(hide) APKCERTS=$(APKCERTS_FILE) ./vendor/baikalos/tools/changelog
+systemimage-changelog:
+	@echo "Making changelog!"
+	./vendor/baikalos/tools/changelog
 
 ifneq ($(BAIKALOS_BUILD_TYPE),DEV)
     CHANGELOG := systemimage-changelog
