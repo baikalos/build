@@ -386,7 +386,7 @@ PRODUCT_PACKAGES_DEBUG := \
     unwind_reg_info \
     unwind_symbols \
 
-ifneq ($(AICP_BUILD),)
+ifneq ($(BAIKALOS_BUILD),)
 PRODUCT_PACKAGES_DEBUG += \
     su
 endif

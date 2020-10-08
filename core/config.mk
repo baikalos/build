@@ -295,8 +295,8 @@ include $(BUILD_SYSTEM)/envsetup.mk
 FIND_LEAVES_EXCLUDES := $(addprefix --prune=, $(SCAN_EXCLUDE_DIRS) .repo .git)
 
 -include vendor/extra/BoardConfigExtra.mk
-ifneq ($(AICP_BUILD),)
-include vendor/aicp/config/BoardConfigAicp.mk
+ifneq ($(BAIKALOS_BUILD),)
+include vendor/baikalos/config/BoardConfigBaikalOS.mk
 endif
 
 # The build system exposes several variables for where to find the kernel
@@ -1233,11 +1233,11 @@ dont_bother_goals := out \
     vbmetaimage-nodeps \
     product-graph dump-products
 
-ifneq ($(AICP_BUILD),)
-ifneq ($(wildcard device/aicp/sepolicy/common/sepolicy.mk),)
+ifneq ($(BAIKALOS_BUILD),)
+ifneq ($(wildcard device/baikalos/sepolicy/common/sepolicy.mk),)
 ## We need to be sure the global selinux policies are included
 ## last, to avoid accidental resetting by device configs
-$(eval include device/aicp/sepolicy/common/sepolicy.mk)
+$(eval include device/baikalos/sepolicy/common/sepolicy.mk)
 endif
 endif
 

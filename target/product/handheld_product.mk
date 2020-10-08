@@ -35,7 +35,7 @@ PRODUCT_PACKAGES += \
     SettingsIntelligence \
     frameworks-base-overlays
 
-ifeq ($(AICP_BUILD),)
+ifeq ($(BAIKALOS_BUILD),)
 PRODUCT_PACKAGES += \
     LatinIME
 endif
