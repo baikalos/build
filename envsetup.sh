@@ -673,7 +673,7 @@ function lunch()
     else
         T=$(gettop)
         cd $T > /dev/null
-        vendor//build/tools/roomservice.py $product true
+        vendor/baikalos/build/tools/roomservice.py $product true
         cd - > /dev/null
     fi
 
