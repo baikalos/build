@@ -56,7 +56,22 @@ fi
 if [ -n "$DEVICE_MAINTAINERS" ] ; then
   echo "ro.baikalos.maintainer=$DEVICE_MAINTAINERS"
 fi
+echo "ro.build.characteristics=$TARGET_AAPT_CHARACTERISTICS"
+
+
+if [ -z "$BAIKALOS_BUILD_TYPE" ] ; then
+  BAIKALOS_BUILD_TYPE="UNOFFICIAL"
+fi
 
 echo "ro.baikalos.device=$BAIKALOS_DEVICE"
+echo "ro.baikalos.ota.version=11-${TARGET_DEVICE#*_}-${BAIKALOS_BUILD_TYPE}-$(cat $OUT_DIR/target/product/${TARGET_DEVICE#*_}/build_date_time.txt)"
+
+# ROMStats
+echo "ro.romstats.buildtype=$BAIKALOS_BUILD_TYPE"
+echo "ro.romstats.url=https://stats.baikalos.ru/"
+echo "ro.romstats.name=BaikalOS"
+echo "ro.romstats.version=11.0"
+echo "ro.romstats.tframe=1"
+echo "ro.romstats.askfirst=0"
 
 echo "# end build properties"

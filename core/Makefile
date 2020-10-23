@@ -466,6 +466,7 @@ endif
 	        TARGET_CPU_ABI_LIST_64_BIT="$(TARGET_CPU_ABI_LIST_64_BIT)" \
 	        TARGET_CPU_ABI="$(TARGET_CPU_ABI)" \
 	        TARGET_CPU_ABI2="$(TARGET_CPU_ABI2)" \
+            BAIKALOS_BUILD_TYPE="$(BAIKALOS_BUILD_TYPE)" \
 	        $(PRODUCT_BUILD_PROP_OVERRIDES) \
 	        bash $(BUILDINFO_SH) >> $@
 	$(hide) $(foreach file,$(system_prop_file), \
@@ -2687,6 +2688,15 @@ ifneq (,$(filter address, $(SANITIZE_TARGET)))
   endif
 endif
 
+.PHONY: systemimage-changelog
+systemimage-changelog:
+	@echo "Making changelog!"
+	./vendor/baikalos/tools/changelog
+
+ifneq ($(BAIKALOS_BUILD_TYPE),DEV)
+    CHANGELOG := systemimage-changelog
+endif
+
 FULL_SYSTEMIMAGE_DEPS += $(INTERNAL_ROOT_FILES) $(INSTALLED_FILES_FILE_ROOT)
 
 # -----------------------------------------------------------------
@@ -4655,7 +4665,8 @@ $(BUILT_TARGET_FILES_PACKAGE): \
 	    $(MAKE_RECOVERY_PATCH) \
 	    $(BUILT_KERNEL_CONFIGS_FILE) \
 	    $(BUILT_KERNEL_VERSION_FILE) \
-	    | $(ACP)
+	    | $(ACP) \
+	    $(CHANGELOG)
 	@echo "Package target files: $@"
 	$(call create-system-vendor-symlink)
 	$(call create-system-product-symlink)
@@ -4997,19 +5008,25 @@ name := $(TARGET_PRODUCT)
 ifeq ($(TARGET_BUILD_TYPE),debug)
   name := $(name)_debug
 endif
-name := $(name)-ota-$(FILE_NAME_TAG)
+
+ifeq ($(BAIKALOS_BUILD_TYPE),DEV)
+    build_date_time := $(shell date +"%Y%m%d")
+else
+    build_date_time := $(shell date +"%Y%m%d-%H%M")
+endif
+
+#name := $(name)-ota-$(FILE_NAME_TAG)
+huy := $(shell echo $(build_date_time) > $(PRODUCT_OUT)/build_date_time.txt)
+name := BaikalOS-11-$(TARGET_DEVICE)-$(BAIKALOS_BUILD_TYPE)-$(build_date_time)
+
 
 INTERNAL_OTA_PACKAGE_TARGET := $(PRODUCT_OUT)/$(name).zip
 INTERNAL_OTA_METADATA := $(PRODUCT_OUT)/ota_metadata
 
-ifeq ($(TARGET_BUILD_VARIANT),user)
-    $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
-else
 ifneq ($(BAIKALOS_BUILD),)
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := true
 else
     $(INTERNAL_OTA_PACKAGE_TARGET): backuptool := false
-endif
 endif
 
 $(INTERNAL_OTA_PACKAGE_TARGET): KEY_CERT_PAIR := $(DEFAULT_KEY_CERT_PAIR)
@@ -5020,6 +5037,25 @@ $(INTERNAL_OTA_PACKAGE_TARGET): $(BUILT_TARGET_FILES_PACKAGE) $(OTA_FROM_TARGET_
 
 .PHONY: otapackage
 otapackage: $(INTERNAL_OTA_PACKAGE_TARGET)
+
+.PHONY: baikalos
+baikalos: otapackage
+	$(hide) ln -f $(INTERNAL_OTA_PACKAGE_TARGET) $(BAIKALOS_TARGET_PACKAGE)
+	echo -e ${CL_BLUE}""${CL_BLUE}
+	echo -e ${CL_BLUE}"==========================================================="${CL_BLUE}
+	echo -e ${CL_BLUE}"=      ===============  ============  ====    =====      =="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ==============  ============  ===  ==  ===  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ====  =============  ============  ==  ====  ==  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ====   ===  ==  =  ===   ===  ==  ====  ===  ======"${CL_BLUE}
+	echo -e ${CL_BLUE}"=      ====  =  ======    ===  =  ==  ==  ====  =====  ===="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ======  ==  ==   =======  ==  ==  ====  =======  =="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ====  ===    ==  ==    ====    ==  ==  ====  ==  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=  ===  ===  =  ==  ==  =  ==  =  ==  ===  ==  ===  ====  ="${CL_BLUE}
+	echo -e ${CL_BLUE}"=      =====    ==  ==  =  ===    ==  ====    =====      =="${CL_BLUE}
+	echo -e ${CL_BLUE}"==========================================================="${CL_BLUE}
+	echo -e ${CL_GREEN}"                           BaikalOS ROM "${CL_GREEN}
+	echo -e ${CL_GREEN}"                                Project "${CL_GREEN}
+
 
 ifeq ($(BOARD_BUILD_RETROFIT_DYNAMIC_PARTITIONS_OTA_PACKAGE),true)
 name := $(TARGET_PRODUCT)
@@ -5035,6 +5071,8 @@ $(INTERNAL_OTA_RETROFIT_DYNAMIC_PARTITIONS_PACKAGE_TARGET): \
     $(OTA_FROM_TARGET_FILES)
 	@echo "Package OTA (retrofit dynamic partitions): $@"
 	$(call build-ota-package-target,$@,-k $(KEY_CERT_PAIR) --retrofit_dynamic_partitions)
+
+BAIKALOS_TARGET_PACKAGE := $(PRODUCT_OUT)/$(BAIKALOS_VERSION).zip
 
 .PHONY: otardppackage
 
