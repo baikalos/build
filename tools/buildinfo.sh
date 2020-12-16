@@ -70,7 +70,7 @@ echo "ro.baikalos.ota.version=11-${TARGET_DEVICE#*_}-${BAIKALOS_BUILD_TYPE}-$(ca
 echo "ro.romstats.buildtype=$BAIKALOS_BUILD_TYPE"
 echo "ro.romstats.url=https://stats.baikalos.ru/"
 echo "ro.romstats.name=BaikalOS"
-echo "ro.romstats.version=11.0"
+echo "ro.romstats.version=11.1"
 echo "ro.romstats.tframe=1"
 echo "ro.romstats.askfirst=0"
 echo "# end build properties"
