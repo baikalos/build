@@ -835,7 +835,9 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
     sysmount = "/system"
 
   if OPTIONS.backuptool:
+    script.Print("Backup");
     script.RunBackup("backup", sysmount, target_info.get('use_dynamic_partitions') == "true")
+    script.Print("Backup complete");
 
   # All other partitions as well as the data wipe use 10% of the progress, and
   # the update of the system partition takes the remaining progress.
@@ -886,11 +888,13 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
 
   device_specific.FullOTA_PostValidate()
 
+  script.WriteRawImage("/boot", "boot.img")
+
   if OPTIONS.backuptool:
     script.ShowProgress(0.02, 10)
+    script.Print("Restore");
     script.RunBackup("restore", sysmount, target_info.get('use_dynamic_partitions') == "true")
-
-  script.WriteRawImage("/boot", "boot.img")
+    script.Print("Restore complete");
 
   script.ShowProgress(0.1, 10)
   device_specific.FullOTA_InstallEnd()
